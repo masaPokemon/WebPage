@@ -1,4 +1,30 @@
-<p>objectタグで埋め込んでいます。</p>
-<object data="https://pokemon-card.com" width="500" height="300">
-  利用できません。
-</object>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube動画</title>
+</head>
+let nameText = document.getElementById('videoId');
+<body>
+    <input type="text" id="videoId"></p>
+    
+    <button onclick="loadVideo(VideoId)">再生</button>
+
+    <div id="videoContainer"></div>
+
+    <script>
+        function loadVideo(videoId) {
+            const iframeHtml = `
+                <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/${videoId}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>`;
+            
+            document.getElementById('videoContainer').innerHTML = iframeHtml;
+        }
+    </script>
+</body>
+</html>
