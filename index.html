@@ -1,30 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-    <title>YouTube動画</title>
+<meta charset="UTF-8">
+<title>youtube</title>
 </head>
-let nameText = document.getElementById('videoId');
 <body>
-    <input type="text" id="videoId"></p>
-    
-    <button onclick="loadVideo(VideoId)">再生</button>
 
-    <div id="videoContainer"></div>
+<p>youtube</p>
 
-    <script>
-        function loadVideo(videoId) {
-            const iframeHtml = `
-                <iframe
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/${videoId}"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>`;
+<p>
+<label>youtubeのURL<input type="text" id="nameText"></label>
+<input type="button" value="Check" id="checkButton">
+</p>
+
+<p id="msg"></p>
+
+<script>
+function loadVideo(videoId) {
+    const iframeHtml = `
+        <iframe
+        width="560"
+        height="315"
+        src="${videoId}"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+        </iframe>`;
             
-            document.getElementById('videoContainer').innerHTML = iframeHtml;
-        }
-    </script>
+    document.getElementById('videoContainer').innerHTML = iframeHtml;
+    
+let nameText = document.getElementById('videoId');
+nameText.value = '';
+let msg = document.getElementById('msg');
+
+let checkButton = document.getElementById('checkButton');
+checkButton.addEventListener('click', loadVideo);
+</script>
+
 </body>
 </html>
