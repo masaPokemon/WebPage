@@ -1,4 +1,147 @@
-<iframe id="inline-frame"
-  scrolling="yes"
-  src="https://pokemon-card.com">
-</iframe>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="referrer" content="no-referrer">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<title>ポケモンカード プレイ シミュレータ</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="icon" type="image/x-icon" href="favicon.png">
+<meta name="keywords" content="デッキ,simulator,pokemon,card">
+<meta name="description" content="ポケモンカードのデッキ調整ツール">
+<link rel="stylesheet" href="assets/base_h.css?240712"><script type="text/javascript" charset="utf-8">
+$(function(){$(window).width()<$(window).height()?($('link[rel=stylesheet]').attr("href","assets/base_h.css?240712"),$(".vmw").hide(),$(".vmh").show()):($('link[rel=stylesheet]').attr("href","assets/base.css?240712"),$(".vmw").show(),$(".vmh").hide())});
+zoom();
+$(window).on('resize load',function(){zoom();});
+function zoom(){if($(window).width()<$(window).height()){var a=500;$("html").css("zoom",$(window).width()/a)}else{a=1360;var b=!1;a/750<$(window).width()/$(window).height()&&(b=!0);$("html").css("zoom",b?$(window).height()/750:$(window).width()/a)}}
+const base='https://www.pokemon-card.com/assets/images/card_images/large';const OWN_NAME='card.php';const BACK_IMAGE='https://www.pokemon-card.com/assets/images/noimage/poke_ura.jpg';
+var hand=[],cardList=[],deck=[];hand.push("0");
+cardList[0]={key:"0",image:"/S12/042184_T_MORINOFUUINSEKI.jpg",place:"hand",type:"道",damage:0,state:"",extra:"",sp:""};
+hand.push("1");
+cardList[1]={key:"1",image:"/SV7a/046288_T_KAUNTAGEIN.jpg",place:"hand",type:"道",damage:0,state:"",extra:"",sp:""};
+hand.push("2");
+cardList[2]={key:"2",image:"/SVK/046088_T_DAICHINOUTSUWA.jpg",place:"hand",type:"品",damage:0,state:"",extra:"",sp:""};
+hand.push("3");
+cardList[3]={key:"3",image:"/SV3/043931_P_PIJIXYOTTOEX.jpg",place:"hand",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+hand.push("4");
+cardList[4]={key:"4",image:"/SVD/043839_T_PEPA.jpg",place:"hand",type:"補",damage:0,state:"",extra:"",sp:""};
+hand.push("5");
+cardList[5]={key:"5",image:"/SV8/046410_P_MONOZU.jpg",place:"hand",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+hand.push("6");
+cardList[6]={key:"6",image:"/SVLN/046219_T_HAIPABORU.jpg",place:"hand",type:"品",damage:0,state:"",extra:"",sp:""};
+cardList[7]={key:"7",image:"/SV8/046412_P_SAZANDORAEX.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("7");
+cardList[8]={key:"8",image:"/SVLN/046218_T_NESUTOBORU.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("8");
+cardList[9]={key:"9",image:"/SVK/046089_T_NAKAYOSHIPOFUIN.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("9");
+cardList[10]={key:"10",image:"/SVD/043839_T_PEPA.jpg",place:"deck",type:"補",damage:0,state:"",extra:"",sp:""};
+deck.push("10");
+cardList[11]={key:"11",image:"/SVLN/046219_T_HAIPABORU.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("11");
+cardList[12]={key:"12",image:"/SVK/046089_T_NAKAYOSHIPOFUIN.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("12");
+cardList[13]={key:"13",image:"/SVLN/046218_T_NESUTOBORU.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("13");
+cardList[14]={key:"14",image:"/SV6a/045914_P_MOMOWAROUEX.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("14");
+cardList[15]={key:"15",image:"/SV8/046412_P_SAZANDORAEX.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("15");
+cardList[16]={key:"16",image:"/ENE/046120_E_KIHONCHIXYOUENERUGI.jpg",place:"deck",type:"エネ",damage:0,state:"",extra:"",sp:""};
+deck.push("16");
+cardList[17]={key:"17",image:"/SVK/046087_T_DAKUPATCHI.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("17");
+cardList[18]={key:"18",image:"/SV8/046411_P_JIHEDDO.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("18");
+cardList[19]={key:"19",image:"/SVK/046092_T_FUSHIGINAAME.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("19");
+cardList[20]={key:"20",image:"/SVLN/046224_T_NANJIXYAMO.jpg",place:"deck",type:"補",damage:0,state:"",extra:"ナンジャモ",sp:""};
+deck.push("20");
+cardList[21]={key:"21",image:"/SVK/046084_T_KAUNTAKIXYATCHIXYA.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("21");
+cardList[22]={key:"22",image:"/SV3/043929_P_POPPO.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("22");
+cardList[23]={key:"23",image:"/SVK/046092_T_FUSHIGINAAME.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("23");
+cardList[24]={key:"24",image:"/ENE/046123_E_KIHONHAGANEENERUGI.jpg",place:"deck",type:"エネ",damage:0,state:"",extra:"",sp:""};
+deck.push("24");
+cardList[25]={key:"25",image:"/S9/040947_P_YOMAWARU.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("25");
+cardList[26]={key:"26",image:"/SV7a/046288_T_KAUNTAGEIN.jpg",place:"deck",type:"道",damage:0,state:"",extra:"",sp:""};
+deck.push("26");
+cardList[27]={key:"27",image:"/SV5K/045217_E_NEOAPPAENERUGI.jpg",place:"deck",type:"エネ",damage:0,state:"",extra:"",sp:""};
+deck.push("27");
+cardList[28]={key:"28",image:"/SVLN/046216_T_SUGOITSURIZAO.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("28");
+cardList[29]={key:"29",image:"/SVD/043839_T_PEPA.jpg",place:"deck",type:"補",damage:0,state:"",extra:"",sp:""};
+deck.push("29");
+cardList[30]={key:"30",image:"/SVK/046092_T_FUSHIGINAAME.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("30");
+cardList[31]={key:"31",image:"/SV7/046036_T_AKAMATSU.jpg",place:"deck",type:"補",damage:0,state:"",extra:"",sp:""};
+deck.push("31");
+cardList[32]={key:"32",image:"/ENE/046122_E_KIHONAKUENERUGI.jpg",place:"deck",type:"エネ",damage:0,state:"",extra:"",sp:""};
+deck.push("32");
+cardList[33]={key:"33",image:"/SV6a/045913_P_KICHIKIGISUEX.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("33");
+cardList[34]={key:"34",image:"/SV6a/045895_P_YONOWARU.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("34");
+cardList[35]={key:"35",image:"/S11/041901_T_NEJIKI.jpg",place:"deck",type:"補",damage:0,state:"",extra:"",sp:""};
+deck.push("35");
+cardList[36]={key:"36",image:"/SVLN/046216_T_SUGOITSURIZAO.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("36");
+cardList[37]={key:"37",image:"/SV3/043931_P_PIJIXYOTTOEX.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("37");
+cardList[38]={key:"38",image:"/SVLN/046227_T_BOSUNOSHIREI.jpg",place:"deck",type:"補",damage:0,state:"",extra:"",sp:""};
+deck.push("38");
+cardList[39]={key:"39",image:"/SVD/043839_T_PEPA.jpg",place:"deck",type:"補",damage:0,state:"",extra:"",sp:""};
+deck.push("39");
+cardList[40]={key:"40",image:"/ENE/046122_E_KIHONAKUENERUGI.jpg",place:"deck",type:"エネ",damage:0,state:"",extra:"",sp:""};
+deck.push("40");
+cardList[41]={key:"41",image:"/SV2D/043206_T_WAZAWAINOARANO.jpg",place:"deck",type:"場",damage:0,state:"",extra:"",sp:""};
+deck.push("41");
+cardList[42]={key:"42",image:"/SVLN/046219_T_HAIPABORU.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("42");
+cardList[43]={key:"43",image:"/SV8/046410_P_MONOZU.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("43");
+cardList[44]={key:"44",image:"/S11/041841_P_ROTOMUV.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:"gx"};
+deck.push("44");
+cardList[45]={key:"45",image:"/ENE/046122_E_KIHONAKUENERUGI.jpg",place:"deck",type:"エネ",damage:0,state:"",extra:"",sp:""};
+deck.push("45");
+cardList[46]={key:"46",image:"/SV8/046410_P_MONOZU.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("46");
+cardList[47]={key:"47",image:"/SVK/046089_T_NAKAYOSHIPOFUIN.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("47");
+cardList[48]={key:"48",image:"/SVK/046084_T_KAUNTAKIXYATCHIXYA.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("48");
+cardList[49]={key:"49",image:"/SVK/046089_T_NAKAYOSHIPOFUIN.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("49");
+cardList[50]={key:"50",image:"/SV6a/045932_T_KUSARIMOCHI.jpg",place:"deck",type:"道",damage:0,state:"",extra:"",sp:""};
+deck.push("50");
+cardList[51]={key:"51",image:"/SVLN/046224_T_NANJIXYAMO.jpg",place:"deck",type:"補",damage:0,state:"",extra:"ナンジャモ",sp:""};
+deck.push("51");
+cardList[52]={key:"52",image:"/SV3/043929_P_POPPO.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("52");
+cardList[53]={key:"53",image:"/SV8/046412_P_SAZANDORAEX.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("53");
+cardList[54]={key:"54",image:"/S9/040932_P_NEORANTOV.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:"gx"};
+deck.push("54");
+cardList[55]={key:"55",image:"/ENE/046122_E_KIHONAKUENERUGI.jpg",place:"deck",type:"エネ",damage:0,state:"",extra:"",sp:""};
+deck.push("55");
+cardList[56]={key:"56",image:"/SVK/046092_T_FUSHIGINAAME.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("56");
+cardList[57]={key:"57",image:"/SV3/043884_P_PII.jpg",place:"deck",type:"ポケ",damage:0,state:"",extra:"",sp:""};
+deck.push("57");
+cardList[58]={key:"58",image:"/SVLN/046219_T_HAIPABORU.jpg",place:"deck",type:"品",damage:0,state:"",extra:"",sp:""};
+deck.push("58");
+cardList[59]={key:"59",image:"/ENE/046122_E_KIHONAKUENERUGI.jpg",place:"deck",type:"エネ",damage:0,state:"",extra:"",sp:""};
+deck.push("59");
+const chk2=()=>{debugger;};setInterval(chk2,500);
+</script>
+</head>
+<body>
+<div>
+<div class="" id="notice" style="display:block;position:absolute;top:230px;font-size:10px;color:red;z-index:1000;background-color:#ffffffc7;">URLが新しくなります<br><a href='https://p.card-tools.com/'>こちら</a>(https://p.card-tools.com/)をご利用ください</div><div class="cmd p_ab"id=side_open>サイドを開く</div><div class="cmd p_ab"id=trash_open>ﾄﾗｯｼｭを開く</div><div class="cmd p_ab"id=lost_open>ロスト<span class=f10>(<span id=lost_count>0</span>)</span></div><div class=p_ab style=right:0;width:150px><div class="cmd p_ab"id=draw>山札を引く</div><div class="area deck sc"id=deck></div><div class="cmd p_ab center"id=deck_open>山札表示<span class=f10>(<span id=lc>0</span>)</span></div><div class=p_ab id=deck_control><div class="p_ab v_center center"id=deck_open_count>表示数：<span id=view_count>all</span></div><div class="p_ab v_center"id=open_minus>－</div><div class="p_ab v_center"id=open_plus>＋</div><div class="p_ab v_center"id=open_course>↑</div><div class="cmd p_ab f10"id=shuffle>シャッフル</div></div></div><div class="area trash"></div><div class="area battle"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div></div><div class="area benches center vmw"style=display:none><table class=bench><tr><td class="area bench1"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench2"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench3"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench4"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench5"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench6"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench7"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench8"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div></table></div><div class="area benches center vmh"style=display:none><table class=bench><tr><td class="area bench1"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench2"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench3"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><tr><td class="area bench4"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench5"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><tr><td class="area bench6"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench7"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div><td class="area bench8"><div class=card></div><div class=goods></div><div class=energy></div><div class=damage></div><div class="ability unused"></div></table></div><div class="area lost"></div><div class="area hand"></div><div class="cmd p_ab f10"id=all_deck>すべて山札に</div><div class="cmd p_ab f10"id=all_trash>全トラッシュ</div><div class="cmd p_ab f10"id=prev>一手戻す</div><div class="area side"></div><div class="area stadium"></div><div><div class="p_ab sub_cmd"id=coin></div><div class="p_ab sub_cmd"id=gx><div></div></div><div class="sub_cmd state"id=poison>毒</div><div class="sub_cmd state"id=born>火</div><div class="sub_cmd state"id=chaos>混</div><div class="sub_cmd state"id=palsy>痺</div><div class="sub_cmd state"id=sleep>眠</div></div><div class=modal style=display:none><div class=p_ab id=image><img src=""></div><span id=pick_id style=display:none></span><table class=buttons><tr><td colspan=5><div class="v_center center"id=do_select>入替え<span>選択</span></div><td colspan=5><div class=button id=go_battle>バトル場</div><div class=button id=go_stadium>スタジアム</div><td colspan=6> <tr class=mode_bench5><td colspan=3><div class="button go_bench go_bench1"data-area=bench1>ベンチ1</div><td colspan=3><div class="button go_bench go_bench2"data-area=bench2>ベンチ2</div><td colspan=3><div class="button go_bench go_bench3"data-area=bench3>ベンチ3</div><td colspan=3><div class="button go_bench go_bench4"data-area=bench4>ベンチ4</div><td colspan=3><div class="button go_bench go_bench5"data-area=bench5>ベンチ5</div><td> <tr class=mode_bench5><td colspan=3><div class="go_bench_thumb pv pv_b1"data-area=bench1></div><td colspan=3><div class="go_bench_thumb pv pv_b2"data-area=bench2></div><td colspan=3><div class="go_bench_thumb pv pv_b3"data-area=bench3></div><td colspan=3><div class="go_bench_thumb pv pv_b4"data-area=bench4></div><td colspan=3><div class="go_bench_thumb pv pv_b5"data-area=bench5></div><td> <tr class=mode_bench8><td colspan=2><div class="button go_bench go_bench1"data-area=bench1>ベンチ1</div><td colspan=2><div class="button go_bench go_bench2"data-area=bench2>ベンチ2</div><td colspan=2><div class="button go_bench go_bench3"data-area=bench3>ベンチ3</div><td colspan=2><div class="button go_bench go_bench4"data-area=bench4>ベンチ4</div><td colspan=2><div class="button go_bench go_bench5"data-area=bench5>ベンチ5</div><td colspan=2><div class="button go_bench go_bench6"data-area=bench6>ベンチ6</div><td colspan=2><div class="button go_bench go_bench7"data-area=bench7>ベンチ7</div><td colspan=2><div class="button go_bench go_bench8"data-area=bench8>ベンチ8</div><tr class=mode_bench8><td colspan=2><div class="go_bench_thumb pv pv_b1"data-area=bench1></div><td colspan=2><div class="go_bench_thumb pv pv_b2"data-area=bench2></div><td colspan=2><div class="go_bench_thumb pv pv_b3"data-area=bench3></div><td colspan=2><div class="go_bench_thumb pv pv_b4"data-area=bench4></div><td colspan=2><div class="go_bench_thumb pv pv_b5"data-area=bench5></div><td colspan=2><div class="go_bench_thumb pv pv_b6"data-area=bench6></div><td colspan=2><div class="go_bench_thumb pv pv_b7"data-area=bench7></div><td colspan=2><div class="go_bench_thumb pv pv_b8"data-area=bench8></div><tr><td colspan=5><div class=button id=go_side>サイド</div><td colspan=5><div class=button id=go_hand>手札</div><td colspan=5><div class=button id=go_deck>山札に戻す</div><div class=button id=put_deck_top>山札の上に</div><div class=button id=put_deck>猿知恵</div><td> <tr><td colspan=5><div class=button id=extra>extra</div><span id=hand_cmd></span><td colspan=5><div class=button id=go_trash>トラッシュ</div><td colspan=5><div class=button id=go_lost>ロスト</div><td> </table></div><div class=all_open style=height:100%;width:100%;overflow-x:auto;overflow-y:auto></div><div class=coin style=display:none></div><div class=deck_cmd style=display:none;top:0><div class=cmd id=start style=position:absolute;left:80px;width:290px;font-size:24px;top:5px;height:24px>バトルスタート！</div><div class=func><div class=note>使われた場合に使用</div><div style=display:flex><div class="cmd show_cmd ジャッジマン"id=ジャッジマン style=font-size:14px>ジャッジマン</div><div class="cmd show_cmd ツツジ"id=ツツジ>ツツジ</div><div class="cmd show_cmd ナンジャモ"id=ナンジャモ>ナンジャモ</div></div><div class=note style=margin-top:5px>ドロー・ベンチ操作</div><div class="cmd show_cmd 手札６"id=手札６>手札6枚にドロー</div><div class="cmd show_cmd ベンチ数"id=ベンチ数>ベンチ8枠拡張</div><div class="cmd hide_cmd 博士"id=博士>博士の研究</div><div class="cmd hide_cmd サナ"id=サナ>ｼｬｯﾌﾙ＆5ﾄﾞﾛｰ</div><div class="cmd hide_cmd シバ"id=シバ>シバ7枚</div><div class="cmd hide_cmd ロトム自転車"id=ロトム自転車>ロトム自転車</div><div class="cmd hide_cmd 命の器"id=命の器>命の器<span class=f10><br>(グッズになって一度手札に戻ります)</span></div><div class="cmd hide_cmd エアメール"id=エアメール>エアメール</div><div class="cmd hide_cmd ヤーコン"id=ヤーコン>ヤーコン</div><div class="cmd hide_cmd ハプウ"id=ハプウ>ハプウ</div><div class="cmd hide_cmd 猿知恵"id=猿知恵>猿知恵</div><div class="cmd hide_cmd ポケギア"id=ポケギア>ポケギア</div><div class="cmd hide_cmd 花選び2-1"id=花選び2-1>花選び</div><div class="cmd hide_cmd 花選び4-2"id=花選び4-2>アビスシーク</div><div class="cmd hide_cmd アクロマ"id=アクロマ>アクロマ</div></div><div class=turn_ctl><div class=turn_ctl_btn><div>サポート</div><div class="ability unused"></div></div><div class=turn_ctl_btn><div>エネ手張り</div><div class="ability unused"></div></div><div class=turn_ctl_btn><div>スタジアム</div><div class="ability unused"></div></div><div style=width:100px;display:inline-block><div class=turn_end style="position:absolute;background-color:#f0f8ff;border:2px solid grey;border-radius:10px;line-height:20px;padding:5px;margin-top:-10px;margin-left:10px;font-size:16px">ターン<br>エンド</div></div></div></div><div class=p_ab id=select_deck style="display:none;"><input id=inputDeckId placeholder=デッキIDを入力 value=p2yEM3-JbwmmQ-M22y2y> <span class=clr>✕</span> <span id=buttonInputDeck class=link>入力IDで表示</span> <span id=showInputDeck class="link outer_tab">デッキ表示</span><div><div class="" id="notice" style="color:red;">URLが新しくなります。<a href='https://p.card-tools.com/'>こちら</a>(https://p.card-tools.com/)をご利用ください</div><h4>【使い方】</h4><ul><li>まずは公式のデッキ構築ツールでデッキを作成してください<li>作成したデッキコードを入力し、「入力IDで表示」を選択<li>バトル場にポケモンを置いたら、「バトルスタート！」を選択<li>ここから先は通常の対戦準備と同じ流れを辿ってください<li>マリガンの場合は画面を再読み込みしてください<li>左上にコマンドボタンがあります。使われた場合やよく使われるボタンを配置しています。<li>博士の研究など、よく使われるカードはカード選択時に左下にコマンド表示されますので、使用すると操作が楽になります<li>"山札の上から７枚見る"などは「表示数：all」の下の「+」「-」ボタンを選択し、表示する枚数に変更すると対応できます<li>山札の下から参照の場合は「↑」を選択して「↓」に切り替えると対応できます<li>ダメカンはポケモンの上の赤青ボタンを選択するとダメカン表示ができます<li>コインはコインマークを選択すると、２種類のイラストが表示されます。どちらかを表としてお使いください<li>縦画面は縦用レイアウト、横画面は横用レイアウトになります<li>その他、不明点やご意見ご感想はX(旧Twitter)へ連絡ください @mr_whimsicott</ul></div><div class="button p_ab"id=select_deck_close>close</div></div><div style=position:absolute;bottom:0;right:5px;font-size:8px;color:#80808099>@mr_whimsicott</div>
+<script src="assets/base.js?240712"></script>
+</body>
+</html>
+
