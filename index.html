@@ -1,25 +1,617 @@
-<!DOCTYPE html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8" />
-<meta name="referrer" content="no-referrer">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<title>ポケモンカード プレイ シミュレータ</title>
-<link rel="shortcut icon" href="favicon.ico">
-<link rel="icon" type="image/x-icon" href="favicon.png">
-<meta name="keywords" content="デッキ,simulator,pokemon,card">
-<meta name="description" content="ポケモンカードのデッキ調整ツール">
-<link rel="stylesheet" href="assets/base_h.css"><script type="text/javascript" charset="utf-8">
-$(function(){$(window).width()<$(window).height()?($('link[rel=stylesheet]').attr("href","assets/base_h.css?240712"),$(".vmw").hide(),$(".vmh").show()):($('link[rel=stylesheet]').attr("href","assets/base.css"),$(".vmw").show(),$(".vmh").hide())});
-zoom();
-$(window).on('resize load',function(){zoom();});
-function zoom(){if($(window).width()<$(window).height()){var a=500;$("html").css("zoom",$(window).width()/a)}else{a=1360;var b=!1;a/750<$(window).width()/$(window).height()&&(b=!0);$("html").css("zoom",b?$(window).height()/750:$(window).width()/a)}}
-const base='https://www.pokemon-card.com/assets/images/card_images/large';const OWN_NAME='card.php';const BACK_IMAGE='https://www.pokemon-card.com/assets/images/noimage/poke_ura.jpg';
-var hand=[],cardList=[],deck=[];const chk2=()=>{debugger;};setInterval(chk2,500);
-</script>
-</head>
-<body>
-<script src="assets/base.js"></script>
-</body>
-</html>
 
+<!--
+* PyWebCopy Engine [version 7.0.2]
+* Copyright 2020; Raja Tomar
+* File mirrored from [https://funamushi.net/pokeca_hitorimawashi/]
+* At UTC datetime: [2024-12-20 02:11:58.340588]
+--><head>
+  <script async src="../../www.googletagmanager.com/gtag/js_id_UA-168604252-1.js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-168604252-1');
+  </script>
+  <meta charset="utf-8">
+  <title>&#12509;&#12465;&#12514;&#12531;&#12459;&#12540;&#12489;1&#20154;&#22238;&#12375;&#12484;&#12540;&#12523;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=yes">
+  <meta name="description" content="&#12509;&#12465;&#12514;&#12531;&#12459;&#12540;&#12489;&#12398;1&#20154;&#22238;&#12375;&#29992;&#12398;&#12484;&#12540;&#12523;&#12391;&#12377;&#12290;">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout_20230228.css">
+  <script src="../../ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js.mjs"></script>
+  <script type="text/javascript" src="js/Sortable.js"></script>
+  <script type="text/javascript" src="js/script_20230428.js"></script>
+</head>
+
+<body>
+  <main>
+    <div class="fieldWrap">
+      <div class="fieldArea" oncontextmenu="return false;">
+        <div style="position: absolute;">
+          <a id="go_to_blog" class="btn01" href="https://funamushi.net/" target="_blank" style="margin-top: 10px; text-decoration: none;">&#12507;&#12540;&#12512;&#12506;&#12540;&#12472;</a>
+          <a id="go_to_manual" class="btn01" href="https://funamushi.net/index.php/page-60/" target="_blank" style="margin-top: 10px; text-decoration: none;">&#20351;&#12356;&#26041;</a>
+          <a id="go_to_manual" class="btn01" href="https://peing.net/ja/funamushi_2764" target="_blank" style="margin-top: 10px; text-decoration: none;">&#35201;&#26395;&#31561;</a>
+        </div>
+        <div style="position: absolute; margin-top: 40px;">
+          <a class="btn01 tweet" href="https://twitter.com/intent/tweet?text=%E3%83%9D%E3%82%B1%E3%82%AB%E4%B8%80%E4%BA%BA%E5%9B%9E%E3%81%97%E3%83%84%E3%83%BC%E3%83%AB&amp;url=https://funamushi.net/pokeca_hitorimawashi/" style="text-decoration: none;" rel="&#8221;nofollow&#8221;" onclick="window.open(encodeURI(decodeURI(this.href)),'twwindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1'); return false;">Twitter&#12391;&#12471;&#12455;&#12450;</a>
+          <a class="btn01" href="https://ofuse.me/funamushi2764" target="_blank" style="margin-top: 10px; text-decoration: none;">&#25903;&#25588;&#12377;&#12427;</a>
+        </div>
+        <div class="hogeArea">
+          <div class="hogeWrapper" style="width:728px;height:90px;">
+            <script async src="../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js.mjs"></script>
+            <!-- &#12484;&#12540;&#12523;&#24195;&#21578; -->
+            <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6928418732713645" data-ad-slot="3074455286"></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+
+        </div>
+        <div id="p1_side" class="sideWrap">
+          <div class="sideArea boxLayout01">
+            <!-- 202207&#12450;&#12503;&#12487;&#8595; -->
+            <div class="boxTitle">side
+              <div class="btnWrap">
+                <a id="p1_side_open" class="btn01">&#34920;&#12395;&#12377;&#12427;</a>
+                <a id="p1_side_shuffle" class="btn01">&#12471;&#12515;&#12483;&#12501;&#12523;</a>
+                <a id="p1_side_get1" class="btn01">1&#26522;&#12392;&#12427;</a>
+                <a id="p1_side_get2" class="btn01">2&#26522;&#12392;&#12427;</a>
+                <a id="p1_side_get3" class="btn01">3&#26522;&#12392;&#12427;</a>
+              </div>
+            </div>
+            <!-- 202207&#12450;&#12503;&#12487;&#8593; -->
+            <ul id="p1_side_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <!-- <div id="p1_GX" class="gxMark">GX</div> -->
+          <div id="p1_Vstar" class="vstarMark">V<span>star</span></div>
+        </div>
+        <div class="battleWrap">
+          <div id="p1_smartphone" class="spMenuArea boxLayout01" style="display:none">
+            <p class="boxTitle">&#12473;&#12510;&#12507;&#29992;</p>
+            <div class="btnWrap">
+              <a id="p1_smartphone_reverse" class="btn01">&#12459;&#12540;&#12489;&#12434;&#35023;&#36820;&#12377;</a>
+              <a id="p1_smartphone_move_to_top" class="btn01">&#12487;&#12483;&#12461;&#12488;&#12483;&#12503;</a>
+              <a id="p1_smartphone_move_to_bottom" class="btn01">&#12487;&#12483;&#12461;&#12508;&#12488;&#12512;</a>
+            </div>
+            <ul id="p1_smartphone_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p1_battle" class="battleArea boxLayout01">
+            <div id="p1_battle_bg" class="bgLayout"></div>
+            <div class="boxTitle">battle
+              <div class="btnWrap">
+                <a id="p1_burn" class="btn01 burn">&#12420;&#12369;&#12393;</a>
+                <a id="p1_poison" class="btn01 poison">&#12393;&#12367;</a>
+                <a id="p1_sleeping" class="btn01 sleeping">&#12397;&#12416;&#12426;</a>
+                <a id="p1_paralysis" class="btn01 paralysis">&#12414;&#12402;</a>
+                <a id="p1_confusion" class="btn01 confusion">&#12371;&#12435;&#12425;&#12435;</a>
+              </div>
+            </div>
+            <div class="btnWrap alR">
+              <input id="p1_battle_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p1_battle_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p1_battle_damage_box_down" class="btn01">&#9660;</a>
+              <a id="p1_battle_to_deck" class="btn01">&#12487;&#12483;&#12461;&#25147;&#12375;</a>
+              <a id="p1_battle_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p1_battle_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <!-- 202207&#12450;&#12503;&#12487;&#8595; -->
+          <div id="p1_lostzone" class="lostArea boxLayout01" style="display:none">
+            <div class="boxTitle">lost(<span id="p1_lostzone_remaining">0</span>)
+            </div>
+            <div class="btnWrap">
+              <a id="p1_lostzone_sort" class="btn01">&#20006;&#12403;&#26367;&#12360;</a>
+            </div>
+            <ul id="p1_lostzone_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <!-- 202207&#12450;&#12503;&#12487;&#8593; -->
+        </div>
+        <div id="p1_bench" class="benchWrap">
+          <div id="p1_bench1" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 1<input id="p1_bench1_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p1_bench1_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p1_bench1_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p1_bench1_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p1_b1_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p1_b1_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p1_bench1_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p1_bench2" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 2<input id="p1_bench2_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p1_bench2_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p1_bench2_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p1_bench2_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p1_b2_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p1_b2_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p1_bench2_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p1_bench3" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 3<input id="p1_bench3_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p1_bench3_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p1_bench3_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p1_bench3_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p1_b3_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p1_b3_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p1_bench3_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p1_bench4" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 4<input id="p1_bench4_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p1_bench4_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p1_bench4_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p1_bench4_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p1_b4_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p1_b4_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p1_bench4_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p1_bench5" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 5<input id="p1_bench5_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p1_bench5_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p1_bench5_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p1_bench5_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p1_b5_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p1_b5_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p1_bench5_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p1_bench6" class="benchArea boxLayout01" style="display:none">
+            <p class="boxTitle">bench 6<input id="p1_bench6_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p1_bench6_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p1_bench6_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p1_bench6_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p1_b6_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p1_b6_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p1_bench6_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p1_bench7" class="benchArea boxLayout01" style="display:none">
+            <p class="boxTitle">bench 7<input id="p1_bench7_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p1_bench7_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p1_bench7_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p1_bench7_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p1_b7_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p1_b7_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p1_bench7_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p1_bench8" class="benchArea boxLayout01" style="display:none">
+            <p class="boxTitle">bench 8<input id="p1_bench8_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p1_bench8_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p1_bench8_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p1_bench8_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p1_b8_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p1_b8_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p1_bench8_wrap" class="cardWrap ">
+            </ul>
+          </div>
+        </div>
+        <div id="p1_hand" class="colLayout01">
+          <div class="handWrap">
+            <div class="handArea boxLayout01">
+              <div class="boxTitle">hand(<span id="p1_hand_remaining">0</span>)
+                <a id="p1_mugen_zone" class="btn01" style="margin-left: 10px; ">&#12505;&#12531;&#12481;+</a>
+                <a id="p1_uncheck" class="btn01" style="margin-left: 10px; ">&#12481;&#12455;&#12483;&#12463;&#35299;&#38500;</a>
+              </div>
+              <div class="btnWrap">
+                <a id="p1_hand_sort" class="btn01">&#20006;&#12403;&#26367;&#12360;</a>
+                <a id="p1_hand_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+                <a id="p1_hand_to_deck" class="btn01">&#12487;&#12483;&#12461;&#25147;&#12375;</a>
+                <a id="p1_hand_hakase" class="btn01">&#21338;&#22763;</a>
+                <a id="p1_hand_marnie" class="btn01" style="display:none">&#12510;&#12522;&#12451;</a>
+                <a id="p1_hand_nanjamo" class="btn01">&#12490;&#12531;&#12472;&#12515;&#12514;</a>
+                <a id="p1_hand_judgeman" class="btn01">&#12472;&#12515;&#12483;&#12472;&#12510;&#12531;</a>
+                <a id="p1_hand_to_deck_bottom" class="btn01">&#12487;&#12483;&#12461;&#19979;</a>
+                <a id="p1_hand_cynthia" class="btn01" style="display:none">&#12471;&#12525;&#12490;</a>
+              </div>
+              <ul id="p1_hand_wrap" class="cardWrap ">
+              </ul>
+            </div>
+          </div>
+          <div id="p1_trash" class="trashWrap">
+            <div class="trashArea boxLayout01">
+              <div class="boxTitle">trash(<span id="p1_trash_remaining">0</span>)
+              </div>
+              <div class="btnWrap">
+                <a id="p1_trash_sort" class="btn01">&#20006;&#12403;&#26367;&#12360;</a>
+                <!-- 202207&#12450;&#12503;&#12487;&#8595; -->
+                <a id="p1_lostzone_btn" class="btn01">&#12525;&#12473;&#12488;&#12478;&#12540;&#12531;&#34920;&#31034;</a>
+                <!-- 202207&#12450;&#12503;&#12487;&#8593; -->
+              </div>
+              <div class="btnWrap">
+              </div>
+              <ul id="p1_trash_wrap" class="cardWrap ">
+              </ul>
+            </div>
+          </div>
+          <div class="deckWrap">
+            <div class="deckArea boxLayout01">
+              <!-- 202207&#12450;&#12503;&#12487;&#8595; -->
+              <div class="boxTitle">deck(<span id="p1_deck_remaining">0</span>)
+              </div>
+              <!-- 202207&#12450;&#12503;&#12487;&#8593; -->
+              <div>
+                <input type="button" id="p1_draw_btn" value="1&#26522;&#12489;&#12525;&#12540;" class="btn01">
+                <input type="button" id="p1_shuffle_btn" value="&#12471;&#12515;&#12483;&#12501;&#12523;" class="btn01">
+                <input type="button" id="p1_deck_5" value="&#23665;&#19978;5&#26522;&#35211;&#12427;" class="btn01">
+                <input type="button" id="p1_deck_btn" value="&#12487;&#12483;&#12461;&#12434;&#35211;&#12427;" class="btn01">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="p1_deck" class="deckListWrap" style="display:none">
+          <div class="boxLayout01">
+            <p class="boxTitle">deck</p>
+            <div>
+              <input type="button" id="p1_deck_sort" value="&#20006;&#12403;&#26367;&#12360;" class="btn01" style="display:none">
+              <input type="button" id="p1_deck_7" value="&#12373;&#12425;&#12395;2&#26522;&#12415;&#12427;" class="btn01" style="display:none">
+            </div>
+            <ul id="p1_deck_wrap" class="cardWrap ">
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="fieldArea" oncontextmenu="return false;">
+        <div class="articleArea">
+          <div class="newEyeCatch">&#26032;&#30528;&#35352;&#20107;</div>
+                    <a href="https://funamushi.net/bench5_to_bench8/" class="article boxLayout02">
+
+            <img src="../wp-content/uploads/2024/07/stella-card-2-300x419.png" class="articleImg">
+            <div class="articleContentBlock">
+              <div class="articleTitle">
+                &#12304;&#12476;&#12525;&#12398;&#22823;&#31354;&#27934;&#12305;1&#20154;&#22238;&#12375;&#12484;&#12540;&#12523;&#12391;&#12505;&#12531;&#12481;&#26528;&#12434;&#22679;&#12420;&#12377;&#26041;&#27861;              </div>
+            </div>
+          </a>
+                    <a href="https://funamushi.net/palworld/" class="article boxLayout02">
+
+            <img src="../wp-content/uploads/2024/01/f8429d_3dc22015906f4c1e98dfc6e1d97267f0mv2-300x103.webp" class="articleImg">
+            <div class="articleContentBlock">
+              <div class="articleTitle">
+                &#12497;&#12523;&#12527;&#12540;&#12523;&#12489;&#12364;&#29289;&#35696;&#12434;&#37304;&#12375;&#12390;&#12356;&#12427;&#12371;&#12392;&#12395;&#12388;&#12356;&#12390;&#24605;&#12358;&#12371;&#12392;&#12290;              </div>
+            </div>
+          </a>
+                    <a href="https://funamushi.net/escapefromcolorlessroom/" class="article boxLayout02">
+
+            <img src="../wp-content/uploads/2023/12/dfvb5BJf-300x169.jpg.jpeg" class="articleImg">
+            <div class="articleContentBlock">
+              <div class="articleTitle">
+                &#12473;&#12510;&#12507;&#12398;&#33073;&#20986;&#12466;&#12540;&#12512;&#20316;&#12387;&#12383;&#65281;&#65281;              </div>
+            </div>
+          </a>
+                  </div>
+        <div id="p2_side" class="sideWrap">
+          <!-- <div id="p2_GX" class="gxMark">GX</div> -->
+          <div id="p2_Vstar" class="vstarMark">V<span>star</span></div>
+          <div class="sideArea boxLayout01">
+            <!-- 202207&#12450;&#12503;&#12487;&#8595; -->
+            <div class="boxTitle">side
+              <div class="btnWrap">
+                <a id="p2_side_open" class="btn01">&#34920;&#12395;&#12377;&#12427;</a>
+                <a id="p2_side_shuffle" class="btn01">&#12471;&#12515;&#12483;&#12501;&#12523;</a>
+                <a id="p2_side_get1" class="btn01">1&#26522;&#12392;&#12427;</a>
+                <a id="p2_side_get2" class="btn01">2&#26522;&#12392;&#12427;</a>
+                <a id="p2_side_get3" class="btn01">3&#26522;&#12392;&#12427;</a>
+              </div>
+            </div>
+            <!-- 202207&#12450;&#12503;&#12487;&#8593; -->
+            <ul id="p2_side_wrap" class="cardWrap">
+            </ul>
+          </div>
+        </div>
+        <div class="stadiumWrap">
+          <div class="stadiumArea boxLayout01">
+            <div id="stadium_bg" class="bgLayout"></div>
+            <div class="boxTitle">stadium
+              <div class="btnWrap alR">
+                <a id="stadium_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+              </div>
+            </div>
+            <ul id="stadium_wrap" class="cardWrap">
+            </ul>
+          </div>
+        </div>
+        <div class="battleWrap">
+          <!-- 202207&#12450;&#12503;&#12487;&#8595; -->
+          <div id="p2_lostzone" class="lostArea boxLayout01" style="display:none">
+            <div class="boxTitle">lost(<span id="p2_lostzone_remaining">0</span>)
+            </div>
+            <div class="btnWrap">
+              <a id="p2_lostzone_sort" class="btn01">&#20006;&#12403;&#26367;&#12360;</a>
+            </div>
+            <ul id="p2_lostzone_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <!-- 202207&#12450;&#12503;&#12487;&#8593; -->
+          <div id="p2_battle" class="battleArea boxLayout01">
+            <div id="p2_battle_bg" class="bgLayout"></div>
+            <div class="boxTitle">battle
+              <div class="btnWrap">
+                <a id="p2_burn" class="btn01 burn">&#12420;&#12369;&#12393;</a>
+                <a id="p2_poison" class="btn01 poison">&#12393;&#12367;</a>
+                <a id="p2_sleeping" class="btn01 sleeping">&#12397;&#12416;&#12426;</a>
+                <a id="p2_paralysis" class="btn01 paralysis">&#12414;&#12402;</a>
+                <a id="p2_confusion" class="btn01 confusion">&#12371;&#12435;&#12425;&#12435;</a>
+              </div>
+            </div>
+            <div class="btnWrap alR">
+              <input id="p2_battle_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p2_battle_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p2_battle_damage_box_down" class="btn01">&#9660;</a>
+              <a id="p2_battle_to_deck" class="btn01">&#12487;&#12483;&#12461;&#25147;&#12375;</a>
+              <a id="p2_battle_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p2_battle_wrap" class="cardWrap">
+            </ul>
+          </div>
+          <div id="p2_smartphone" class="spMenuArea boxLayout01" style="display:none">
+            <p class="boxTitle">&#12473;&#12510;&#12507;&#29992;</p>
+            <div class="btnWrap">
+              <a id="p2_smartphone_reverse" class="btn01">&#12459;&#12540;&#12489;&#12434;&#35023;&#36820;&#12377;</a>
+              <a id="p2_smartphone_move_to_top" class="btn01">&#12487;&#12483;&#12461;&#12488;&#12483;&#12503;</a>
+              <a id="p2_smartphone_move_to_bottom" class="btn01">&#12487;&#12483;&#12461;&#12508;&#12488;&#12512;</a>
+            </div>
+            <ul id="p2_smartphone_wrap" class="cardWrap ">
+            </ul>
+          </div>
+        </div>
+        <div id="p2_bench" class="benchWrap">
+          <div id="p2_bench1" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 1<input id="p2_bench1_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p2_bench1_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p2_bench1_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p2_bench1_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p2_b1_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p2_b1_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p2_bench1_wrap" class="cardWrap">
+            </ul>
+          </div>
+          <div id="p2_bench2" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 2<input id="p2_bench2_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p2_bench2_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p2_bench2_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p2_bench2_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p2_b2_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p2_b2_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p2_bench2_wrap" class="cardWrap">
+            </ul>
+          </div>
+          <div id="p2_bench3" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 3<input id="p2_bench3_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p2_bench3_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p2_bench3_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p2_bench3_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p2_b3_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p2_b3_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p2_bench3_wrap" class="cardWrap">
+            </ul>
+          </div>
+          <div id="p2_bench4" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 4<input id="p2_bench4_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p2_bench4_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p2_bench4_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p2_bench4_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p2_b4_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p2_b4_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p2_bench4_wrap" class="cardWrap">
+            </ul>
+          </div>
+          <div id="p2_bench5" class="benchArea boxLayout01">
+            <p class="boxTitle">bench 5<input id="p2_bench5_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p2_bench5_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p2_bench5_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p2_bench5_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p2_b5_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p2_b5_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p2_bench5_wrap" class="cardWrap">
+            </ul>
+          </div>
+          <div id="p2_bench6" class="benchArea boxLayout01" style="display:none">
+            <p class="boxTitle">bench 6<input id="p2_bench6_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p2_bench6_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p2_bench6_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p2_bench6_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p2_b6_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p2_b6_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p2_bench6_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p2_bench7" class="benchArea boxLayout01" style="display:none">
+            <p class="boxTitle">bench 7<input id="p2_bench7_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p2_bench7_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p2_bench7_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p2_bench7_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p2_b7_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p2_b7_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p2_bench7_wrap" class="cardWrap ">
+            </ul>
+          </div>
+          <div id="p2_bench8" class="benchArea boxLayout01" style="display:none">
+            <p class="boxTitle">bench 8<input id="p2_bench8_damage_box" type="tel" name="num" class="damageBox">
+              <a id="p2_bench8_damage_box_up" class="btn01">&#9650;</a>
+              <a id="p2_bench8_damage_box_down" class="btn01">&#9660;</a>
+            </p>
+            <div id="p2_bench8_bg" class="bgLayout"></div>
+            <div class="btnWrap">
+              <a id="p2_b8_battle" class="btn01">&#12496;&#12488;&#12523;&#22580;</a>
+              <a id="p2_b8_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+            </div>
+            <ul id="p2_bench8_wrap" class="cardWrap ">
+            </ul>
+          </div>
+        </div>
+        <div class="colLayout01">
+          <div id="p2_hand" class="handWrap">
+            <div class="handArea boxLayout01">
+              <div class="boxTitle">hand(<span id="p2_hand_remaining">0</span>)
+                <a id="p2_mugen_zone" class="btn01" style="margin-left: 10px; ">&#12505;&#12531;&#12481;+</a>
+                <a id="p2_uncheck" class="btn01" style="margin-left: 10px; ">&#12481;&#12455;&#12483;&#12463;&#35299;&#38500;</a>
+              </div>
+              <div class="btnWrap">
+                <a id="p2_hand_sort" class="btn01">&#20006;&#12403;&#26367;&#12360;</a>
+                <a id="p2_hand_trash" class="btn01">&#12488;&#12521;&#12483;&#12471;&#12517;</a>
+                <a id="p2_hand_to_deck" class="btn01">&#12487;&#12483;&#12461;&#25147;&#12375;</a>
+                <a id="p2_hand_hakase" class="btn01">&#21338;&#22763;</a>
+                <a id="p2_hand_marnie" class="btn01" style="display:none">&#12510;&#12522;&#12451;</a>
+                <a id="p2_hand_nanjamo" class="btn01">&#12490;&#12531;&#12472;&#12515;&#12514;</a>
+                <a id="p2_hand_judgeman" class="btn01">&#12472;&#12515;&#12483;&#12472;&#12510;&#12531;</a>
+                <a id="p2_hand_to_deck_bottom" class="btn01">&#12487;&#12483;&#12461;&#19979;</a>
+                <a id="p2_hand_cynthia" class="btn01" style="display:none">&#12471;&#12525;&#12490;</a>
+              </div>
+              <ul id="p2_hand_wrap" class="cardWrap">
+              </ul>
+            </div>
+          </div>
+          <div id="p2_trash" class="trashWrap">
+            <div class="trashArea boxLayout01">
+              <div class="boxTitle">trash(<span id="p2_trash_remaining">0</span>)
+              </div>
+              <div class="btnWrap">
+                <a id="p2_trash_sort" class="btn01">&#20006;&#12403;&#26367;&#12360;</a>
+                <!-- 202207&#12450;&#12503;&#12487;&#8595; -->
+                <a id="p2_lostzone_btn" class="btn01">&#12525;&#12473;&#12488;&#12478;&#12540;&#12531;&#34920;&#31034;</a>
+                <!-- 202207&#12450;&#12503;&#12487;&#8593; -->
+              </div>
+              <div class="btnWrap">
+              </div>
+              <ul id="p2_trash_wrap" class="cardWrap">
+              </ul>
+            </div>
+          </div>
+          <div class="deckWrap">
+            <div class="deckArea boxLayout01">
+              <!-- 202207&#12450;&#12503;&#12487;&#8595; -->
+              <div class="boxTitle">deck(<span id="p2_deck_remaining">0</span>)
+              </div>
+              <!-- 202207&#12450;&#12503;&#12487;&#8593; -->
+              <div>
+                <input type="button" id="p2_draw_btn" value="1&#26522;&#12489;&#12525;&#12540;" class="btn01">
+                <input type="button" id="p2_shuffle_btn" value="&#12471;&#12515;&#12483;&#12501;&#12523;" class="btn01">
+                <input type="button" id="p2_deck_5" value="&#23665;&#19978;5&#26522;&#35211;&#12427;" class="btn01">
+                <input type="button" id="p2_deck_btn" value="&#12487;&#12483;&#12461;&#12434;&#35211;&#12427;" class="btn01">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="p2_deck" class="deckListWrap" style="display:none">
+          <div class="boxLayout01">
+            <p class="boxTitle">deck</p>
+            <div>
+              <input type="button" id="p2_deck_sort" value="&#20006;&#12403;&#26367;&#12360;" class="btn01" style="display:none">
+              <input type="button" id="p2_deck_7" value="&#12373;&#12425;&#12395;2&#26522;&#12415;&#12427;" class="btn01" style="display:none">
+            </div>
+            <ul id="p2_deck_wrap" class="cardWrap">
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="shareArea">
+        <div class="fromWrap">
+          <input type="text" name="num" id="left_code" class="inputLeft" placeholder="&#12487;&#12483;&#12461;&#12467;&#12540;&#12489;&#12434;&#20837;&#21147;">
+          <input type="button" id="set-btn" value="SET!" class="submitBtn">
+          <input type="text" name="num" id="right_code" class="inputRight" placeholder="&#12487;&#12483;&#12461;&#12467;&#12540;&#12489;&#12434;&#20837;&#21147;">
+        </div>
+        <div class="fromWrap" oncontextmenu="return false;">
+          <div class="btnWrap" style="text-align: center;margin-top: 10px;">
+            <a id="move_to_deck_check1" class="btn01" href="https://funamushi.net/pokeca_hitorimawashi/pokeca_deck_check/" target="_blank" style="text-decoration: none;">1&#12487;&#12483;&#12461;&#29992;</a>
+            <a id="p1_reset" class="btn01">&#24341;&#12365;&#30452;&#12375;</a>
+            <a id="smartphone_btn" class="smartphoneBtn">&#12473;&#12510;&#12507;&#12456;&#12522;&#12450;&#36861;&#21152;</a>
+            <a id="p2_reset" class="btn01">&#24341;&#12365;&#30452;&#12375;</a>
+            <a id="move_to_deck_check2" class="btn01" href="https://funamushi.net/pokeca_hitorimawashi/pokeca_deck_check/" target="_blank" style="text-decoration: none;">1&#12487;&#12483;&#12461;&#29992;</a>
+          </div>
+          <div class="shareContent" oncontextmenu="return false;">
+            <div class="coinWrap boxLayout01">
+              <p class="boxTitle">coin</p>
+              <div class="coinArea">
+                <img id="coin" class="coinBack" src="img/coin.png" alt="coincheck!">
+              </div>
+            </div>
+            <div class="damageCountWrap boxLayout01" oncontextmenu="return false;">
+              <p class="boxTitle">damageCounter</p>
+              <div class="damageCountArea" id="app">
+                <div id="damecan10" class="damecan" data-damege="10">10</div>
+                <div id="damecan50" class="damecan" data-damege="50">50</div>
+                <div id="damecan100" class="damecan" data-damege="100">100</div>
+                <div id="trashBox" class="trashBox"><img src="img/gomibako.png" alt=""></div>
+              </div>
+            </div>
+            <div class="arrArea" oncontextmenu="return false;">
+              <div id="moveLeftButton" class="arrLeft">&lt;</div>
+              <div id="moveRightButton" class="arrRight">&gt;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="contextmenu" oncontextmenu="return false;">
+        <ul>
+          <li id="retuen_to_deck">&#12487;&#12483;&#12461;&#12395;&#25147;&#12375;&#12390;&#12471;&#12515;&#12483;&#12501;&#12523;</li>
+          <li id="move_to_trash">&#12488;&#12521;&#12483;&#12471;&#12517;</li>
+          <li id="go_to_card_page">&#22823;&#12365;&#12356;&#30011;&#20687;&#12434;&#34920;&#31034;</li>
+          <li id="move_to_top">&#12487;&#12483;&#12461;&#12488;&#12483;&#12503;&#12395;&#25147;&#12377;</li>
+          <li id="move_to_bottom">&#12487;&#12483;&#12461;&#12508;&#12488;&#12512;&#12395;&#25147;&#12377;</li>
+          <li id="saru">&#12373;&#12427;&#12386;&#12360;</li>
+          <li id="reverse_card">&#35023;&#34920;&#12434;&#36870;&#12395;&#12377;&#12427;</li>
+          <li id="move_to_hand">&#25163;&#26413;&#12395;&#21152;&#12360;&#12427;</li>
+        </ul>
+      </div>
+      <div>
+        <div class="loading is-hide" oncontextmenu="return false;">
+          <div class="loading_icon"></div>
+        </div>
+  
+</div></div></main></body>
+
+</html>
